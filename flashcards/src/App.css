@@ -1,0 +1,61 @@
+
+body{ 
+  background-color : rgba(250, 166, 166, 0.786);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1, h3, h5 {
+  text-align: center;
+}
+
+.NextButton{
+  position: absolute;
+  bottom: 20px; /* Adjust this value as needed */
+  left: 45%;
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+  height: auto;
+
+}
+
+.NextButton:hover{
+  transform: scale(1.05);
+}
+
+.FlashCard{
+  position: absolute; /* Position the FlashCard */
+  top: 50%; /* Move the top edge to the vertical center */
+  left: 50%; /* Move the left edge to the horizontal center */
+  transform: translate(-50%, -50%); /* Adjust to center the element */
+  width: 900px;
+  height: 500px;
+  border-radius: 8px;
+  border: 1px solid;
+  border-color: #000000;
+  background-color: aliceblue;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  text-align: center;
+}
+
+.FlashCard.blue {
+  background-color: rgb(163, 207, 245);
+}
+
+.FlashCard.green {
+  background-color: rgb(181, 245, 163);
+}
+
+.FlashCard.yellow {
+  background-color: rgb(245, 242, 163);
+}
