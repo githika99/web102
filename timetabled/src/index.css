@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh; 
+}
+
+th {
+  width: 120px;
+  padding-top:25px;
+  padding-bottom:30px;
+}
+
+td {
+  padding: 10px;
+}
+
+.time {
+  height: 40px;
+}
+
+table {
+  border-spacing: 2px 0; /* Remove the default spacing between cells */
+}
+
+.Event {
+  width: 100px;
+  height: 50px;
+}
+
+.Event h6, h5 {
+  line-height: 0px;
+  text-align: center;
+}
+
+.pink {
+  background: pink;
+}
+
+.blue {
+  background: rgb(190, 219, 229);
+}
+
+.green {
+  background: rgb(202, 245, 222);
+} 
+
+.orange {
+  background: rgb(255, 234, 165);
+} 
+
+.red {
+  background: rgb(255, 132, 132);
+} 

@@ -18,9 +18,27 @@ function App() {
     { id: 9, side1: 'Why is studying olfactory more complicated than studying vision?', side2: "There are 350 different types of olfactory receptors, meansing", color: 'blue'},
     { id: 10, side1: 'Start! Click on the card for it to flip.', side2: "Use the arrow to go to the next card!", color: 'blue'},
   ]
+
+  const [ansState, setAnsState] = useState("")
   
+  const [answer, setAnswer] = useState("")
+
+  const handleAnswer = (event) => {
+    setAnswer(event.target.value);
+  };
 
   const [display, setDisplay] = useState(arr[card]["side1"])
+
+  function checkAns(){
+    if (answer != arr[card]['side2']){
+      setAnswer('wrong');
+      console.log("answer is wrong")
+    }
+    else {
+      setAnswer("correct");
+      console.log("answer is correct")
+    }
+  }
 
 
   function handleClick2(){ 
@@ -30,10 +48,20 @@ function App() {
       });
   }
 
-  function arrowClick(){ 
+  function nextCard(){ 
     console.log("arrow pressed");
     setCard((prevCard) => {                       //before, we had this setCard((prevCard) => (prevCard + 1) % total);
       const newCard = (prevCard + 1) % total;     //that function implicitly returns the new card
+      console.log("card is now", newCard);        //it also knows that the parameter is prevCard, even if we don't call it that
+      setDisplay(arr[newCard]["side1"]);
+      return newCard;                             //this line actually changes the value of card
+    });
+  }
+
+  function lastCard(){ 
+    console.log("arrow pressed");
+    setCard((prevCard) => {                       //before, we had this setCard((prevCard) => (prevCard + 1) % total);
+      const newCard = (prevCard - 1) % total;     //that function implicitly returns the new card
       console.log("card is now", newCard);        //it also knows that the parameter is prevCard, even if we don't call it that
       setDisplay(arr[newCard]["side1"]);
       return newCard;                             //this line actually changes the value of card
@@ -52,7 +80,20 @@ function App() {
       <h2>{display}</h2>
     </div>
 
-    <img className = 'NextButton' src = 'src/assets/arrow.png' onClick = {arrowClick}></img> 
+    <div className = 'answerClass'>
+
+    <h3>Your Answer</h3>
+    <input 
+        type="text"
+        value={answer}
+        onChange={handleAnswer}
+        placeholder="Type something..."
+    />
+    <button className='CheckButton' onClick={checkAns}>Submit</button>
+    </div>
+
+    <img className = 'BackButton' src = 'src/assets/arrow_back.png' onClick = {lastCard}></img> 
+    <img className = 'NextButton' src = 'src/assets/arrow.png' onClick = {nextCard}></img> 
     
     </>
   )
