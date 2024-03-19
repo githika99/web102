@@ -1,38 +1,30 @@
-# Web Development Project 2 - *Perception FlashCards*
+# Web Development Project 3 - *Perception FlashCards*
 
 Submitted by: **Githika Annapureddy**
 
 This web app: **Flashcards that you can interact with by flipping and going to the next card.**
 
-Time spent: **4-5** hours spent in total
+Time spent: **2-3** hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [X] **The title of the card set and some information about it, such as a short description and the total number of cards are displayed**
-- [X] **A single card at a time is displayed, only showing one of the components of the information pair**
-- [X] **A list of card pairs is created**
-- [X] **Clicking on the card shows the corresponding component of the information pair**
-- [X] **Clicking the next button displays a random new card**
+- [X] **The user can enter their guess in a box before seeing the flipside of the card**
+- [X] **Clicking on a submit button shows visual feedback about whether the answer was correct or incorrect**
+- [X] **A back button is displayed on the card and can be used to return to the previous card in a set sequence**
+- [X] **A next button is displayed on the card and can be used to navigate to the next card in a set sequence**
 
 The following **optional** features are implemented:
 
-- [ ] Cards contains images in addition to or in place of text
-- [X] Cards have different visual styles such as color based on their category
-  - [X] Questions about the visual perception are blue, questions about auditory perception are yellow, and questions about other types of perception are green.
-
 The following **additional** features are implemented:
-
-* [ ] List anything else that you added to improve the site's functionality!
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented required features: Please view at https://imgur.com/dADnQOI if it is not visible in the GIF preview.
+Here's a walkthrough of implemented required features: Please view at [https://imgur.com/VitWNsr] (https://imgur.com/VitWNsr) if it is not visible in the GIF preview.
 
-<img src='https://imgur.com/dADnQOI' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/VitWNsr' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
 LiceCap and Imgur.
 
