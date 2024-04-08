@@ -1,32 +1,38 @@
-# Web Development Project 5 - *Cat Explorer*
+# Web Development Project 6 - *Cat Explorer*
 
 Submitted by: **Githika Annapureddy**
 
-This web app: **You can see a list of cats with different categories presented. You can search for a cat's breed. You can click a filter to only see energetic cats or intelligent cats.**
+This web app: **insert description**
 
-Time spent: **6** hours spent in total
+Time spent: **4** hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [X] **The list displays a list of data fetched using an API call**
-- [X] **Data uses the useEffect React hook and async/await syntax**
-- [X] **The app dashboard includes at least three summary statistics about the data such as**
-  - [X] *Average Cat Affection*
-  - [X] *Average Cat Energy Level*
-  - [X] *Average Cat Intelligence*
-- [X] **A search bar allows the user to search for an item in the fetched data**
-- [X] **Multiple different filters (2+) allow the user to filter items in the database by specified categories**
+- [ ] **The app includes at least one unique chart developed using the fetched data that tell an interesting story**
+- [X] **Clicking on an item in the list view displays more details about it**
+- [X] **Clicking on an item has a direct, unique link to that item's detail view page**
+
+
+The following **optional** features are implemented:
+
+- [ ] The site's customized dashboard contains more content that explains what is interesting about the data
+- [ ] The site allows users to toggle between different data visualizations
+
+The following **additional** features are implemented:
+
+* [ ] List anything else that you added to improve the site's functionality!
 
 ## Video Walkthrough
 
-Here's a walkthrough of implemented user stories. If you cannot view this GIF please visit: https://imgur.com/a/oBj86Ae. 
+Here's a walkthrough of implemented user stories: Access at: https://imgur.com/P5A31hv, if GIF not loading. 
 
-<img src='https://imgur.com/a/oBj86Ae' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/P5A31hv' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+<!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
-LiceCap and Imgur
+LiceCAP and Imgur
 
 ## Notes
 
@@ -47,11 +53,3 @@ Describe any challenges encountered while building the app.
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
