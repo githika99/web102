@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 
 
 
-function Create({supabase}) {const handleSubmit = async (event) => {
+function Create({supabase}) {
+  const [name, setName] = useState('');
+  const [magic, setMagic] = useState('');
+  const [house, setHouse] = useState('');
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission here (e.g., store data in a database, display confirmation)
     console.log('Name:', name);

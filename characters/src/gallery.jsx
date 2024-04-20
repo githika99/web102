@@ -8,6 +8,9 @@ function Gallery({supabase}) {
     const [characters, setCharacters] = useState([]);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Define isEditModalOpen state
     const [characterToEdit, setCharacterToEdit] = useState(null);
+    const [name, setName] = useState(''); // State variable for name
+    const [magic, setMagic] = useState(''); // State variable for magic
+    const [house, setHouse] = useState(''); // State variable for house
 
     useEffect(() => {
         getCharacters();
@@ -62,18 +65,21 @@ function Gallery({supabase}) {
         try {
           const { error } = await supabase
             .from("characters3")
-            .update(updatedCharacter)
+            .update({ name, magic, house })
             .match({ id: characterToEdit.id });
-    
+            console.log("updated character's name is", updatedCharacter.name)
           if (error) {
             console.error('Error updating character:', error);
           } else {
             console.log('Character updated successfully!');
             // Update characters state with updated data (optional)
             setCharacters(
-              characters.map((c) => (c.id === characterToEdit.id ? updatedCharacter : c))
+              characters.map((c) => (c.id === characterToEdit.id ? { name, magic, house } : c))
             );
             setIsEditModalOpen(false);
+            setName('');
+            setMagic('');
+            setHouse('');
           }
         } catch (error) {
           console.error('Error updating character:', error);
@@ -116,6 +122,7 @@ function Gallery({supabase}) {
                 id="name"
                 defaultValue={characterToEdit.name} // Set default value
                 required
+                onChange={(e) => setName(e.target.value)}
               />
               <label htmlFor="magic">Magical Strength:</label>
               <input
@@ -123,13 +130,14 @@ function Gallery({supabase}) {
                 id="magic"
                 defaultValue={characterToEdit.magic}
                 required
+                onChange={(e) => setMagic(e.target.value)}
               />
               <label htmlFor="house">House:</label>
-              <select id="house" defaultValue={characterToEdit.house} required>
-                <option value="Gryffindor">Gryffindor</option>
-                <option value="Slytherin">Slytherin</option>
-                <option value="Ravenclaw">Ravenclaw</option>
-                <option value="Hufflepuff">Hufflepuff</option>
+              <select id="house" defaultValue={characterToEdit.house} onChange={(e) => setHouse(e.target.value)} required>
+                <option value="gryffindor">Gryffindor</option>
+                <option value="slytherin">Slytherin</option>
+                <option value="ravenclaw">Ravenclaw</option>
+                <option value="hufflepuff">Hufflepuff</option>
               </select>
               <button type="submit" onClick={() => handleEditSubmit(characterToEdit)}>
                 Save Changes
