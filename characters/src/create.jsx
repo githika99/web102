@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 
 
 
-function Create({supabase}) {
-  const [name, setName] = useState('');
-  const [magic, setMagic] = useState('');
-  const [house, setHouse] = useState('');
-
-  const handleSubmit = async (event) => {
+function Create({supabase}) {const handleSubmit = async (event) => {
     event.preventDefault();
     // Handle form submission here (e.g., store data in a database, display confirmation)
     console.log('Name:', name);
@@ -18,7 +13,7 @@ function Create({supabase}) {
     
     try {
         const { data, error } = await supabase
-          .from('characters2') // Replace with your table name
+          .from('characters3') // Replace with your table name
           .insert([character]);
     
         if (error) {
