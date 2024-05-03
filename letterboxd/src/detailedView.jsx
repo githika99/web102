@@ -9,7 +9,7 @@ function DetailedView() {
   return (
     <div>
       <h2>Detailed View</h2>
-      <p>Title: {movie_title}</p>
+      <p>Title: {title}</p>
       <p>Review: {rating}</p>
       <p>Stars: {stars}</p>
       <p>Likes: {likes}</p>

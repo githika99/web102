@@ -13,7 +13,7 @@ function Create({supabase}) {
     console.log('movie title:', title);
     console.log('rating:', rating);
     console.log('stars:', stars);
-    const post = { movie_title: title, rating, stars, likes: 0, time_created: '2024-05-02 21:25:46', comments: [] };
+    const post = { title, rating, stars, likes: 0, time_created: '2024-05-02 21:25:46', comments: [] };
 
     
     try {
