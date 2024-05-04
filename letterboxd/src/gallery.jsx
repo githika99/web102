@@ -25,6 +25,7 @@ function Gallery({supabase}) {
         const { data } = await supabase.from("all_posts").select();
         setPosts(data);
         setFilteredPosts(data); // Set initial filtered posts to all posts
+        console.log("posts is", posts) //will be empty because of javascript's async updating
     }
 
     // Filter posts based on search query

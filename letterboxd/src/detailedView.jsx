@@ -4,32 +4,36 @@ import { useParams } from 'react-router-dom';
 
 function DetailedView({supabase}) {
   const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState([]);
   const { id } = useParams();
+  const id_num = parseInt(id);
 
   useEffect(() => {
     console.log("use effect called")
     console.log("id is", id)
-    getPosts();
-    getData(id)
+    async function getPosts() {
+      const { data } = await supabase.from("all_posts").select();
+      setPosts(data);
+    }
+    getPosts()
   }, []);
 
-  async function getPosts() {
-    const { data } = await supabase.from("all_posts").select();
-    setPosts(data);
-    console.log("in getPosts, posts is", posts)
-  }
 
-  const getData = (id) => {
-    console.log("in getData")
-    console.log("posts is", posts)
-    console.log("done with getData")
-  }
+  useEffect(() => {
+    console.log("use effect: posts is now", posts)
+    const curr = posts.find(post => post.id === id_num);
+    setPost(curr)
+  }, [posts]);
 
-  console.log("in detailed view's function")
+
+  useEffect(() => {
+    console.log("use effect: post is now", post)
+  }, [post]);
+  
+
   return (
     <div>
-      {/* <div className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gridGap: '10px' }} >
-        {posts.filter(post => post.id === id).map((post) => (
+      <div className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gridGap: '10px' }} >
           <div className="character-box" key={post.id} style={{ backgroundColor: '#f5f5f5', padding: '10px', borderRadius: '5px' }}
           >
             <p>Title: {post.title}</p>
@@ -42,8 +46,7 @@ function DetailedView({supabase}) {
             <button onClick={() => handleDeletePost(post)}>Delete</button>
             <button onClick={() => handleAddLike(post)}>Like</button>
           </div>
-        ))}
-      </div> */}
+      </div>
     </div>
   );
 }
