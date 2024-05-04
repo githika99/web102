@@ -11,6 +11,7 @@ function Gallery({supabase}) {
     const [title, setTitle] = useState('');
     const [rating, setRating] = useState('');
     const [stars, setStars] = useState('');
+    const [likes, setLikes] = useState('');
 
     useEffect(() => {
         console.log("use effect called")
@@ -112,6 +113,24 @@ function Gallery({supabase}) {
       setPostToEdit(null); // Clear post for editing
     };
 
+    const handleAddLike = async (post) => {
+      // Increment the likes count locally
+      const updatedLikes = post.likes + 1;
+
+      // Update the post's likes count in the database
+      const { error } = await supabase
+        .from("all_posts")
+        .update({ likes: updatedLikes })
+        .match({ id: post.id });
+
+      if (error) {
+        console.error('Error updating post:', error);
+      } else {
+        // Update the posts state with the updated likes count
+        setPosts(posts.map((c) => (c.id === post.id ? { ...c, likes: updatedLikes } : c)));
+      }
+    }
+
 
   return (
     <div className="gallery">
@@ -123,11 +142,14 @@ function Gallery({supabase}) {
             <p>Title: {post.title}</p>
             <p>Review: {post.rating}</p>
             <p>Stars: {post.stars}</p>
+            <p>Likes: {post.likes}</p>
+            <p>Time Created: {post.time_created}</p>
             <Link to={`/post-gallery/${post.id}`}>
               Details
             </Link>
             <button onClick={() => handleEditClick(post)}>Edit</button>
             <button onClick={() => handleDeletePost(post)}>Delete</button>
+            <button onClick={() => handleAddLike(post)}>Like</button>
           </div>
         ))}
       </div>
