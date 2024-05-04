@@ -6,6 +6,8 @@ import Modal from './Modal.jsx'; // Import your Modal component
 
 function Gallery({supabase}) {
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]); // State to store filtered posts
+    const [searchQuery, setSearchQuery] = useState(''); // State to store search query
     const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Define isEditModalOpen state
     const [postToEdit, setPostToEdit] = useState(null);
     const [title, setTitle] = useState('');
@@ -21,7 +23,19 @@ function Gallery({supabase}) {
     async function getPosts() {
         const { data } = await supabase.from("all_posts").select();
         setPosts(data);
+        setFilteredPosts(data); // Set initial filtered posts to all posts
     }
+
+    // Filter posts based on search query
+    const handleSearch = (event) => {
+      const query = event.target.value.toLowerCase();
+      setSearchQuery(query);
+      const filteredData = posts.filter((post) =>
+        post.title.toLowerCase().includes(query)
+      );
+      setFilteredPosts(filteredData);
+      console.log("filtered posts is", filteredPosts)
+    };
 
     //changed to delete by id
     const handleDeletePost = async (post) => {
@@ -135,8 +149,14 @@ function Gallery({supabase}) {
   return (
     <div className="gallery">
       <h2>Post Gallery</h2>
+      <input
+        type="text"
+        placeholder="Search by Movie Title"
+        onChange={handleSearch}
+        value={searchQuery}
+      />
       <div className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gridGap: '10px' }} >
-        {posts.map((post) => (
+        {filteredPosts.map((post) => (
           <div className="character-box" key={post.id} style={{ backgroundColor: '#f5f5f5', padding: '10px', borderRadius: '5px' }}
           >
             <p>Title: {post.title}</p>
