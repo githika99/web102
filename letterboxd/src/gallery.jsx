@@ -13,7 +13,8 @@ function Gallery({supabase}) {
     const [title, setTitle] = useState('');
     const [rating, setRating] = useState('');
     const [stars, setStars] = useState('');
-    const [likes, setLikes] = useState('');
+    const [sortBy, setSortBy] = useState('created_time_desc'); // State to store sort option
+
 
     useEffect(() => {
         console.log("use effect called")
@@ -35,6 +36,33 @@ function Gallery({supabase}) {
       );
       setFilteredPosts(filteredData);
       console.log("filtered posts is", filteredPosts)
+    };
+
+    // Sort posts based on selected option
+    const handleSort = (event) => {
+      const sortOption = event.target.value;
+      setSortBy(sortOption);
+
+      let sortedPosts = [...filteredPosts]; // Copy the filtered posts array to avoid mutation
+
+      switch (sortOption) {
+        case 'created_time_asc':
+          sortedPosts.sort((a, b) => new Date(a.time_created) - new Date(b.time_created));
+          break;
+        case 'created_time_desc':
+          sortedPosts.sort((a, b) => new Date(b.time_created) - new Date(a.time_created));
+          break;
+        case 'likes_asc':
+          sortedPosts.sort((a, b) => a.likes - b.likes);
+          break;
+        case 'likes_desc':
+          sortedPosts.sort((a, b) => b.likes - a.likes);
+          break;
+        default:
+          break;
+      }
+
+      setFilteredPosts(sortedPosts);
     };
 
     //changed to delete by id
@@ -155,6 +183,12 @@ function Gallery({supabase}) {
         onChange={handleSearch}
         value={searchQuery}
       />
+      <select value={sortBy} onChange={handleSort}>
+        <option value="created_time_desc">Sort by Created Time (Descending)</option>
+        <option value="created_time_asc">Sort by Created Time (Ascending)</option>
+        <option value="likes_desc">Sort by Upvotes (Descending)</option>
+        <option value="likes_asc">Sort by Upvotes (Ascending)</option>
+      </select>
       <div className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gridGap: '10px' }} >
         {filteredPosts.map((post) => (
           <div className="character-box" key={post.id} style={{ backgroundColor: '#f5f5f5', padding: '10px', borderRadius: '5px' }}
