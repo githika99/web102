@@ -29,7 +29,13 @@ function DetailedView({supabase}) {
   useEffect(() => {
     console.log("use effect: post is now", post)
   }, [post]);
-  
+
+  //i didn't know you could have multiple returns in JSX okayyyyyyyy
+  //this is necessary!!!!!!!!! without this we get an error, so while post is not loaded, this will render
+  if (!post) {
+    return <p>Loading...</p>; // Render a loading state until post is fetched
+  }
+
 
   return (
     <div>
