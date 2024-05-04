@@ -74,9 +74,14 @@ function Gallery({supabase}) {
         }); 
           console.log('Post deleted successfully!');
           // Update posts state to reflect deletion (optional)
+          //this name posts is a filler name, it can be anything
+          //that is why we can use posts in the second filter call
           setPosts(posts.filter((c) => 
           c.id !== post.id
-          ));          
+          ));        
+          setFilteredPosts(posts.filter((c) => 
+          c.id !== post.id
+          ));    
         
       } catch (error) {
         console.error('Error deleting post:', error);
@@ -107,6 +112,9 @@ function Gallery({supabase}) {
             setPosts(
               posts.map((c) => (c.id === postToEdit.id ? { ...c, stars} : c))
             );
+            setFilteredPosts(
+              posts.map((c) => (c.id === postToEdit.id ? { ...c, stars} : c))
+            );
           }
         }
 
@@ -122,6 +130,9 @@ function Gallery({supabase}) {
             setPosts(
               posts.map((c) => (c.id === postToEdit.id ? {...c, rating} : c))
             );
+            setFilteredPosts(
+              posts.map((c) => (c.id === postToEdit.id ? {...c, rating} : c))
+            );
           }
         }
 
@@ -135,6 +146,9 @@ function Gallery({supabase}) {
             success = false
           } else {
             setPosts(
+              posts.map((c) => (c.id === postToEdit.id ? { ...c, title} : c))
+            );
+            setFilteredPosts(
               posts.map((c) => (c.id === postToEdit.id ? { ...c, title} : c))
             );
           }
@@ -171,6 +185,8 @@ function Gallery({supabase}) {
       } else {
         // Update the posts state with the updated likes count
         setPosts(posts.map((c) => (c.id === post.id ? { ...c, likes: updatedLikes } : c)));
+        setFilteredPosts(filteredPosts.map((c) => (c.id === post.id ? { ...c, likes: updatedLikes } : c)));
+
       }
     }
 
