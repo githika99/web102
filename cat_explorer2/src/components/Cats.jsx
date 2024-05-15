@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 
 const Cats = ({ cats }) => {
   let catid = "abys"
+
+  console.log("input to cats is filtered cats:")
+  console.log(cats)
   return (
     <table>
       <thead>

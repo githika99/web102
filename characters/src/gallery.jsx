@@ -21,16 +21,6 @@ function Gallery({supabase}) {
         setCharacters(data);
     }
 
-    //not ever calling this
-    const handleCharacterClick = (character) => {
-        // Create a unique path with character information (replace with desired format)
-        const path = `/crewmate-gallery/${character.name}-${character.magic}-${character.house}`;
-    
-        // Navigate to the path using Link from react-router-dom
-        window.location.href = path; // Alternative using Link component below
-        console.log("click handled properly")
-      };
-
     const handleDeleteCharacter = async (character) => {
         try {
           const { error } = await supabase.from("characters3").delete().match({ 
@@ -113,7 +103,7 @@ function Gallery({supabase}) {
       </div>
       {isEditModalOpen && (
         <Modal onClose={handleModalClose}>
-          <h2>Edit Character</h2> {/* Change title to Edit Character */}
+          <h2>Edit Character</h2> 
           {characterToEdit && (
             <form onSubmit={(e) => e.preventDefault()}> {/* Wrap inputs in form */}
               <label htmlFor="name">Name:</label>

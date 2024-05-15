@@ -17,6 +17,7 @@ function App() {
       console.log(data);
 
       const processedData = data.map((cat) => ({
+        id: cat.id,
         breed: cat.name,
         picture: cat.image ? cat.image.url : 'https://placekitten.com/200/300', // Use a placeholder if missing
         affection_level: cat.affection_level,
@@ -113,3 +114,12 @@ function App() {
 }
 
 export default App;
+
+
+/*
+My code: saving an array of cats as a variable, then looping through each cat to print the info onto screen
+  - only shows 30 cats
+
+Their code: saves one coin at a time
+  - shows all the coins
+*/

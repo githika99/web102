@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './App.css';
 import Cats from './components/Cats'; // Assuming Cats is a separate component
 
@@ -80,6 +81,12 @@ function App() {
     return true;
   });
 
+  const handleCatClick = (cat) => {
+    // Navigate to cat details page using useNavigate
+    const navigate = useNavigate();
+    navigate(`/catDetails/${cat.breed}`); // Replace :catname with breed
+  };
+
   return (
     <div className="App">
       <h1>Cat Explorer</h1>
@@ -98,7 +105,7 @@ function App() {
         <button onClick={handleEnergeticCats}>Energetic Cats</button>
         <button onClick={handleSmartCats}>Smart Cats</button>
         {filterMode && <button onClick={clearFilter}>Clear Filter</button>}
-      </div>
+        </div>
       <input
         type="text"
         placeholder="Search Cats..."
@@ -107,7 +114,7 @@ function App() {
       <div className="summary">
         {/* ... summary boxes for averages */}
       </div>
-      <Cats cats={filteredCats} />
+      <Cats cats={filteredCats} onCatClick = {handleCatClick} />
     </div>
   );
 }
