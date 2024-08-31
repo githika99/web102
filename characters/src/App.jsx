@@ -16,9 +16,10 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<div>Home</div>} />
-            <Route path="/create-crewmate" element={<Create supabase={supabase}/>} />
-            <Route path="/crewmate-gallery" element={<Gallery supabase={supabase}/>} />
-            <Route path="/crewmate-gallery/:name-:magic-:house" element={<DetailedView />} />
+            <Route path="/create-post" element={<Create supabase={supabase}/>} />
+            <Route path="/post-gallery" element={<Gallery supabase={supabase}/>} />
+            <Route path="/post-gallery/:name-:magic-:description" element={<DetailedView/>} />
+            <Route path="/post-gallery/HINDZ" element={<DetailedView/>} />
             <Route path="*" element={<div>404: Not Found</div>} />
           </Routes>
           <Outlet /> {/* Outlet for nested routes */}

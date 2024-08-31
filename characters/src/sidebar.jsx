@@ -6,10 +6,10 @@ function SideBar() {
     <nav className="sidebar">
       <ul>
         <li>
-          <Link to="/create-crewmate">Create a Crewmate</Link>
+          <Link to="/create-post">Create a Post</Link>
         </li>
         <li>
-          <Link to="/crewmate-gallery">Crewmate Gallery</Link>
+          <Link to="/post-gallery">Post Gallery</Link>
         </li>
       </ul>
     </nav>

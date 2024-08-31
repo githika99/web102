@@ -5,12 +5,13 @@ import Modal from './Modal.jsx'; // Import your Modal component
 
 
 function Gallery({supabase}) {
+    console.log("in gallery")
     const [characters, setCharacters] = useState([]);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false); // Define isEditModalOpen state
     const [characterToEdit, setCharacterToEdit] = useState(null);
     const [name, setName] = useState(''); // State variable for name
     const [magic, setMagic] = useState(''); // State variable for magic
-    const [house, setHouse] = useState(''); // State variable for house
+    const [description, setDescription] = useState(''); // State variable for house
 
     useEffect(() => {
         getCharacters();
@@ -26,7 +27,7 @@ function Gallery({supabase}) {
           const { error } = await supabase.from("characters3").delete().match({ 
             name: character.name,
             magic: character.magic,
-            house: character.house, 
+            description: character.description, 
         }); 
     
           if (error) {
@@ -37,7 +38,7 @@ function Gallery({supabase}) {
             setCharacters(characters.filter((c) => 
             c.name !== character.name || // Filter based on combined criteria
             c.magic !== character.magic ||
-            c.house !== character.house
+            c.description !== character.description
             ));          
           }
         } catch (error) {
@@ -55,7 +56,7 @@ function Gallery({supabase}) {
         try {
           const { error } = await supabase
             .from("characters3")
-            .update({ name, magic, house })
+            .update({ name, magic, description })
             .match({ id: characterToEdit.id });
             console.log("updated character's name is", updatedCharacter.name)
           if (error) {
@@ -64,12 +65,12 @@ function Gallery({supabase}) {
             console.log('Character updated successfully!');
             // Update characters state with updated data (optional)
             setCharacters(
-              characters.map((c) => (c.id === characterToEdit.id ? { name, magic, house } : c))
+              characters.map((c) => (c.id === characterToEdit.id ? { name, magic, description } : c))
             );
             setIsEditModalOpen(false);
             setName('');
             setMagic('');
-            setHouse('');
+            setDescription('');
           }
         } catch (error) {
           console.error('Error updating character:', error);
@@ -84,16 +85,24 @@ function Gallery({supabase}) {
 
   return (
     <div className="gallery">
-      <h2>Crewmate Gallery</h2>
+      <h2>Post Gallery</h2>
       <div className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gridGap: '10px' }} >
         {characters.map((character) => (
-          <div className="character-box" key={character.name} style={{ backgroundColor: '#f5f5f5', padding: '10px', borderRadius: '5px' }}
+          <div className="character-box" key={character.id} style={{ backgroundColor: '#f5f5f5', padding: '10px', borderRadius: '5px' }}
           //onClick={() => handleCharacterClick(character)} 
           >
             <p>Name: {character.name}</p>
-            <p>Magical Strength: {character.magic}</p>
-            <p>House: {character.house}</p>
-            <Link to={`/crewmate-gallery/${character.name}-${character.magic}-${character.house}`}>
+            <p>URL:
+              <a
+              href={character.magic}
+              target='_blank'
+              rel="noopener"
+              >
+              {character.magic}
+              </a>
+            </p>
+            <p>Description: {character.description}</p>
+            <Link to={`/post-gallery/${encodeURIComponent(character.name)}`}>
               Details
             </Link>
             <button onClick={() => handleEditClick(character)}>Edit</button>
@@ -114,7 +123,7 @@ function Gallery({supabase}) {
                 required
                 onChange={(e) => setName(e.target.value)}
               />
-              <label htmlFor="magic">Magical Strength:</label>
+              <label htmlFor="magic">URL:</label>
               <input
                 type="text"
                 id="magic"
@@ -122,13 +131,13 @@ function Gallery({supabase}) {
                 required
                 onChange={(e) => setMagic(e.target.value)}
               />
-              <label htmlFor="house">House:</label>
-              <select id="house" defaultValue={characterToEdit.house} onChange={(e) => setHouse(e.target.value)} required>
-                <option value="gryffindor">Gryffindor</option>
-                <option value="slytherin">Slytherin</option>
-                <option value="ravenclaw">Ravenclaw</option>
-                <option value="hufflepuff">Hufflepuff</option>
-              </select>
+              <label htmlFor="description">Description:</label>
+              <input
+                type="text"
+                id="description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
               <button type="submit" onClick={() => handleEditSubmit(characterToEdit)}>
                 Save Changes
               </button>
